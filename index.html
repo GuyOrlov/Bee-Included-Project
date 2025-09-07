@@ -21,109 +21,178 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Tailwind V4 Global CSS */
+        /* Tailwind V4 Global CSS - Matching your existing styles exactly */
+        @custom-variant dark (&:is(.dark *));
+        @custom-variant yellow (&:is(.yellow *));
+
         :root {
-            --font-size: 16px;
-            --background: #ffffff;
-            --foreground: #2c2c2c;
-            --card: #ffffff;
-            --card-foreground: #2c2c2c;
-            --popover: #ffffff;
-            --popover-foreground: #2c2c2c;
-            --primary: #c6212e;
-            --primary-foreground: #ffffff;
-            --secondary: #f5e6e7;
-            --secondary-foreground: #c6212e;
-            --muted: #f8f9fa;
-            --muted-foreground: #000000;
-            --accent: #f5e6e7;
-            --accent-foreground: #c6212e;
-            --destructive: #c6212e;
-            --destructive-foreground: #ffffff;
-            --border: rgba(198, 33, 46, 0.15);
-            --input: transparent;
-            --input-background: #f8f9fa;
-            --switch-background: #e0e0e0;
-            --font-weight-medium: 500;
-            --font-weight-normal: 400;
-            --ring: rgba(198, 33, 46, 0.3);
-            --chart-1: #c6212e;
-            --chart-2: #e85a67;
-            --chart-3: #f29da3;
-            --chart-4: #fbd7da;
-            --chart-5: #f5e6e7;
-            --radius: 0.625rem;
-            
-            /* Bee Included Brand Colors */
-            --bee-primary: #c6212e;
-            --bee-primary-light: #e85a67;
-            --bee-primary-lighter: #f29da3;
-            --bee-primary-lightest: #fbd7da;
-            --bee-primary-pale: #f5e6e7;
-            --bee-primary-dark: #a01b26;
-            --bee-primary-darker: #7a151e;
-            
-            /* Text colors for different backgrounds */
-            --text-on-primary: #ffffff;
-            --text-on-primary-muted: rgba(255, 255, 255, 0.8);
-            
-            /* Footer text */
-            --footer-text: #ffffff;
-            --footer-text-muted: rgba(255, 255, 255, 0.8);
+          --font-size: 16px;
+          --background: #ffffff;
+          --foreground: #2c2c2c;
+          --card: #ffffff;
+          --card-foreground: #2c2c2c;
+          --popover: #ffffff;
+          --popover-foreground: #2c2c2c;
+          --primary: #c6212e;
+          --primary-foreground: #ffffff;
+          --secondary: #f5e6e7;
+          --secondary-foreground: #c6212e;
+          --muted: #f8f9fa;
+          --muted-foreground: #000000;
+          --accent: #f5e6e7;
+          --accent-foreground: #c6212e;
+          --destructive: #c6212e;
+          --destructive-foreground: #ffffff;
+          --border: rgba(198, 33, 46, 0.15);
+          --input: transparent;
+          --input-background: #f8f9fa;
+          --switch-background: #e0e0e0;
+          --font-weight-medium: 500;
+          --font-weight-normal: 400;
+          --ring: rgba(198, 33, 46, 0.3);
+          --chart-1: #c6212e;
+          --chart-2: #e85a67;
+          --chart-3: #f29da3;
+          --chart-4: #fbd7da;
+          --chart-5: #f5e6e7;
+          --radius: 0.625rem;
+          --sidebar: #ffffff;
+          --sidebar-foreground: #2c2c2c;
+          --sidebar-primary: #c6212e;
+          --sidebar-primary-foreground: #ffffff;
+          --sidebar-accent: #f5e6e7;
+          --sidebar-accent-foreground: #c6212e;
+          --sidebar-border: rgba(198, 33, 46, 0.15);
+          --sidebar-ring: rgba(198, 33, 46, 0.3);
+          
+          /* Bee Included Brand Colors */
+          --bee-primary: #c6212e;
+          --bee-primary-light: #e85a67;
+          --bee-primary-lighter: #f29da3;
+          --bee-primary-lightest: #fbd7da;
+          --bee-primary-pale: #f5e6e7;
+          --bee-primary-dark: #a01b26;
+          --bee-primary-darker: #7a151e;
+          
+          /* Text colors for different backgrounds */
+          --text-on-primary: #ffffff;
+          --text-on-primary-muted: rgba(255, 255, 255, 0.8);
+          
+          /* Footer text - always white for readability on red background */
+          --footer-text: #ffffff;
+          --footer-text-muted: rgba(255, 255, 255, 0.8);
         }
 
         .dark {
-            --background: #000000;
-            --foreground: #ffffff;
-            --card: #000000;
-            --card-foreground: #ffffff;
-            --popover: #000000;
-            --popover-foreground: #ffffff;
-            --primary: #c6212e;
-            --primary-foreground: #ffffff;
-            --secondary: #1a1a1a;
-            --secondary-foreground: #ffffff;
-            --muted: #1a1a1a;
-            --muted-foreground: #cccccc;
-            --accent: #1a1a1a;
-            --accent-foreground: #ffffff;
-            --destructive: #dc2626;
-            --destructive-foreground: #ffffff;
-            --border: rgba(255, 255, 255, 0.2);
-            --input: #1a1a1a;
-            --input-background: #1a1a1a;
-            --switch-background: #333333;
-            --ring: rgba(198, 33, 46, 0.4);
+          --background: #000000;
+          --foreground: #ffffff;
+          --card: #000000;
+          --card-foreground: #ffffff;
+          --popover: #000000;
+          --popover-foreground: #ffffff;
+          --primary: #c6212e;
+          --primary-foreground: #ffffff;
+          --secondary: #1a1a1a;
+          --secondary-foreground: #ffffff;
+          --muted: #1a1a1a;
+          --muted-foreground: #cccccc;
+          --accent: #1a1a1a;
+          --accent-foreground: #ffffff;
+          --destructive: #dc2626;
+          --destructive-foreground: #ffffff;
+          --border: rgba(255, 255, 255, 0.2);
+          --input: #1a1a1a;
+          --input-background: #1a1a1a;
+          --switch-background: #333333;
+          --ring: rgba(198, 33, 46, 0.4);
+          --font-weight-medium: 500;
+          --font-weight-normal: 400;
+          --chart-1: #c6212e;
+          --chart-2: #e85a67;
+          --chart-3: #f29da3;
+          --chart-4: #fbd7da;
+          --chart-5: #f5e6e7;
+          --sidebar: #000000;
+          --sidebar-foreground: #ffffff;
+          --sidebar-primary: #c6212e;
+          --sidebar-primary-foreground: #ffffff;
+          --sidebar-accent: #1a1a1a;
+          --sidebar-accent-foreground: #ffffff;
+          --sidebar-border: rgba(255, 255, 255, 0.2);
+          --sidebar-ring: rgba(198, 33, 46, 0.4);
+          
+          /* Dark mode bee colors */
+          --bee-primary: #c6212e;
+          --bee-primary-light: #e85a67;
+          --bee-primary-lighter: #f29da3;
+          --bee-primary-lightest: #fbd7da;
+          --bee-primary-pale: #f5e6e7;
+          --bee-primary-dark: #a01b26;
+          --bee-primary-darker: #7a151e;
+          
+          /* Text colors for different backgrounds */
+          --text-on-primary: #ffffff;
+          --text-on-primary-muted: rgba(255, 255, 255, 0.8);
+          
+          /* Footer text - always white for readability on red background */
+          --footer-text: #ffffff;
+          --footer-text-muted: rgba(255, 255, 255, 0.8);
         }
 
         .yellow {
-            --background: #FDC300;
-            --foreground: #000000;
-            --card: #FDC300;
-            --card-foreground: #000000;
-            --popover: #FDC300;
-            --popover-foreground: #000000;
-            --primary: #c6212e;
-            --primary-foreground: #ffffff;
-            --secondary: #f5d000;
-            --secondary-foreground: #000000;
-            --muted: #f5d000;
-            --muted-foreground: #333333;
-            --accent: #f5d000;
-            --accent-foreground: #000000;
-            --destructive: #c6212e;
-            --destructive-foreground: #ffffff;
-            --border: rgba(0, 0, 0, 0.2);
-            --input: #f5d000;
-            --input-background: #f5d000;
-            --switch-background: #e6b800;
-            --ring: rgba(0, 0, 0, 0.3);
-            --font-weight-medium: 600;
-            --font-weight-normal: 500;
-            
-            /* Text colors for different backgrounds - BLACK text in yellow mode */
-            --text-on-primary: #000000;
-            --text-on-primary-muted: rgba(0, 0, 0, 0.8);
+          --background: #FDC300;
+          --foreground: #000000;
+          --card: #FDC300;
+          --card-foreground: #000000;
+          --popover: #FDC300;
+          --popover-foreground: #000000;
+          --primary: #c6212e;
+          --primary-foreground: #ffffff;
+          --secondary: #f5d000;
+          --secondary-foreground: #000000;
+          --muted: #f5d000;
+          --muted-foreground: #333333;
+          --accent: #f5d000;
+          --accent-foreground: #000000;
+          --destructive: #c6212e;
+          --destructive-foreground: #ffffff;
+          --border: rgba(0, 0, 0, 0.2);
+          --input: #f5d000;
+          --input-background: #f5d000;
+          --switch-background: #e6b800;
+          --ring: rgba(0, 0, 0, 0.3);
+          --font-weight-medium: 600;
+          --font-weight-normal: 500;
+          --chart-1: #c6212e;
+          --chart-2: #e85a67;
+          --chart-3: #f29da3;
+          --chart-4: #fbd7da;
+          --chart-5: #f5e6e7;
+          --sidebar: #FDC300;
+          --sidebar-foreground: #000000;
+          --sidebar-primary: #c6212e;
+          --sidebar-primary-foreground: #ffffff;
+          --sidebar-accent: #f5d000;
+          --sidebar-accent-foreground: #000000;
+          --sidebar-border: rgba(0, 0, 0, 0.2);
+          --sidebar-ring: rgba(0, 0, 0, 0.3);
+          
+          /* Yellow mode bee colors */
+          --bee-primary: #c6212e;
+          --bee-primary-light: #e85a67;
+          --bee-primary-lighter: #f29da3;
+          --bee-primary-lightest: #fbd7da;
+          --bee-primary-pale: #f5e6e7;
+          --bee-primary-dark: #a01b26;
+          --bee-primary-darker: #7a151e;
+          
+          /* Text colors for different backgrounds - BLACK text in yellow mode */
+          --text-on-primary: #000000;
+          --text-on-primary-muted: rgba(0, 0, 0, 0.8);
+          
+          /* Footer text - always white for readability on red background */
+          --footer-text: #ffffff;
+          --footer-text-muted: rgba(255, 255, 255, 0.8);
         }
 
         body {
@@ -133,7 +202,56 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Custom component styles */
+        /* Base typography matching your existing styles */
+        h1 {
+          font-size: 2rem;
+          font-weight: var(--font-weight-medium);
+          line-height: 1.5;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+          font-weight: var(--font-weight-medium);
+          line-height: 1.5;
+        }
+
+        h3 {
+          font-size: 1.25rem;
+          font-weight: var(--font-weight-medium);
+          line-height: 1.5;
+        }
+
+        h4 {
+          font-size: 1rem;
+          font-weight: var(--font-weight-medium);
+          line-height: 1.5;
+        }
+
+        p {
+          font-size: 1rem;
+          font-weight: var(--font-weight-normal);
+          line-height: 1.5;
+        }
+
+        label {
+          font-size: 1rem;
+          font-weight: var(--font-weight-medium);
+          line-height: 1.5;
+        }
+
+        button {
+          font-size: 1rem;
+          font-weight: var(--font-weight-medium);
+          line-height: 1.5;
+        }
+
+        input {
+          font-size: 1rem;
+          font-weight: var(--font-weight-normal);
+          line-height: 1.5;
+        }
+
+        /* Custom component styles matching ShadCN */
         .card {
             background-color: var(--card);
             color: var(--card-foreground);
@@ -141,72 +259,70 @@
             border-radius: var(--radius);
         }
 
-        .btn-primary {
-            background-color: var(--bee-primary);
-            color: var(--text-on-primary);
-            border: none;
-            padding: 0.75rem 1.5rem;
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
             border-radius: var(--radius);
             font-weight: var(--font-weight-medium);
+            transition: all 0.3s;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border: none;
+            padding: 0.75rem 1.5rem;
         }
 
-        .btn-primary:hover {
+        .button-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .button-primary:hover {
             background-color: var(--bee-primary-dark);
         }
 
-        .btn-secondary {
+        .button-outline {
             background-color: transparent;
+            border: 1px solid var(--border);
             color: var(--foreground);
-            border: 2px solid var(--border);
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius);
-            font-weight: var(--font-weight-medium);
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .btn-secondary:hover {
-            background-color: var(--muted);
+        .button-outline:hover {
+            background-color: var(--accent);
         }
 
         .input {
-            background-color: var(--input-background);
-            color: var(--foreground);
-            border: 1px solid var(--border);
-            padding: 0.75rem;
-            border-radius: var(--radius);
+            display: flex;
+            height: 2.5rem;
             width: 100%;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background-color: var(--input-background);
+            padding: 0.5rem 0.75rem;
+            color: var(--foreground);
         }
 
         .textarea {
-            background-color: var(--input-background);
-            color: var(--foreground);
-            border: 1px solid var(--border);
-            padding: 0.75rem;
-            border-radius: var(--radius);
+            display: flex;
+            min-height: 4rem;
             width: 100%;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background-color: var(--input-background);
+            padding: 0.5rem 0.75rem;
+            color: var(--foreground);
             resize: vertical;
         }
 
         .select {
-            background-color: var(--input-background);
-            color: var(--foreground);
-            border: 1px solid var(--border);
-            padding: 0.75rem;
-            border-radius: var(--radius);
+            display: flex;
+            height: 2.5rem;
             width: 100%;
-        }
-
-        /* Animation utilities */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background-color: var(--input-background);
+            padding: 0.5rem 0.75rem;
+            color: var(--foreground);
         }
 
         /* Screen reader only */
@@ -222,7 +338,7 @@
             border: 0;
         }
 
-        /* Cookie consent styles */
+        /* Cookie consent */
         .cookie-consent {
             position: fixed;
             bottom: 0;
@@ -234,27 +350,64 @@
             z-index: 50;
         }
 
-        /* Mobile responsive adjustments */
+        /* Logo and brand elements */
+        .bee-logo {
+            height: 3rem;
+            width: auto;
+        }
+
+        /* Mobile responsive */
         @media (max-width: 768px) {
             .mobile-hidden {
                 display: none;
             }
         }
 
-        /* Hero section specific dark mode styles */
-        .hero-container {
-            background: linear-gradient(135deg, #f0fdfa 0%, #cdfdf6 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1rem;
+        /* Appearance switcher dropdown */
+        .appearance-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            width: 8rem;
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 50;
         }
 
-        .dark .hero-container {
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        .appearance-dropdown button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            text-align: left;
+            transition: background-color 0.2s;
         }
 
-        .yellow .hero-container {
-            background: #FDC300;
+        .appearance-dropdown button:first-child {
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
+        }
+
+        .appearance-dropdown button:last-child {
+            border-bottom-left-radius: var(--radius);
+            border-bottom-right-radius: var(--radius);
+        }
+
+        .appearance-dropdown button:hover {
+            background-color: var(--muted);
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -335,14 +488,15 @@
                 h('button', {
                     onClick: () => setIsOpen(!isOpen),
                     className: 'flex items-center space-x-2 px-3 py-2 rounded-lg bg-background border border-border hover:bg-muted transition-colors',
-                    'aria-label': 'Change appearance mode'
+                    'aria-label': 'Change appearance mode',
+                    style: { backgroundColor: 'var(--background)', borderColor: 'var(--border)', color: 'var(--foreground)' }
                 },
                     h(modes.find(m => m.id === mode)?.icon || icons.Sun, { className: 'h-4 w-4' }),
                     h('span', { className: 'hidden sm:inline' }, modes.find(m => m.id === mode)?.label),
                     h(icons.ChevronDown, { className: 'h-4 w-4' })
                 ),
                 isOpen && h('div', {
-                    className: 'absolute top-full right-0 mt-2 w-32 bg-card border border-border rounded-lg shadow-lg z-50'
+                    className: 'appearance-dropdown'
                 },
                     modes.map(modeOption => 
                         h('button', {
@@ -351,7 +505,8 @@
                                 setMode(modeOption.id);
                                 setIsOpen(false);
                             },
-                            className: `w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-muted transition-colors first:rounded-t-lg last:rounded-b-lg ${mode === modeOption.id ? 'bg-muted' : ''}`
+                            className: `w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-muted transition-colors ${mode === modeOption.id ? 'bg-muted' : ''}`,
+                            style: { color: 'var(--foreground)' }
                         },
                             h(modeOption.icon, { className: 'h-4 w-4' }),
                             h('span', null, modeOption.label)
@@ -361,83 +516,121 @@
             );
         }
 
-        // Header Component
+        // Header Component - Matching your existing header exactly
         function Header({ activeSection, onSectionChange }) {
-            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-            const navItems = [
-                'Home', 'About', 'Services', 'Case Studies', 'Mapping', 'Contact'
+            const menuItems = [
+                "Home",
+                "About", 
+                "Services",
+                "Case Studies",
+                "Mapping",
+                "Contact"
             ];
 
             return h('header', { 
-                className: 'sticky top-0 z-40 w-full border-b border-border',
+                className: 'sticky top-0 z-50 shadow-sm',
                 style: { backgroundColor: 'var(--background)' }
             },
-                h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
-                    h('div', { className: 'flex items-center justify-between h-16' },
+                h('nav', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                    h('div', { className: 'flex justify-between items-center h-16' },
                         // Logo
-                        h('div', { className: 'flex items-center' },
+                        h('div', { className: 'flex-shrink-0' },
                             h('button', {
-                                onClick: () => onSectionChange('Home'),
-                                className: 'flex items-center space-x-2'
+                                onClick: () => onSectionChange("Home"),
+                                className: 'flex items-center'
                             },
-                                h('div', {
-                                    className: 'h-8 w-8 rounded-full flex items-center justify-center',
-                                    style: { backgroundColor: 'var(--bee-primary)' }
-                                },
-                                    h('span', { 
-                                        className: 'font-bold text-sm',
-                                        style: { color: 'var(--text-on-primary)' }
-                                    }, 'B')
-                                ),
-                                h('span', { 
-                                    className: 'font-bold text-xl',
-                                    style: { color: 'var(--foreground)' }
-                                }, 'Bee Included')
+                                h('img', {
+                                    src: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWUlMjBpbmNsdXNpb24lMjBsb2dvfGVufDF8fHx8MTc1NzI1MjY4M3ww&ixlib=rb-4.1.0&q=80&w=200&utm_source=figma&utm_medium=referral',
+                                    alt: 'Bee Included company logo featuring a stylized bee icon with the text Bee Included - representing the workplace inclusion consulting firm mission to create accessible and inclusive environments for all',
+                                    className: 'bee-logo'
+                                })
                             )
                         ),
                         
                         // Desktop Navigation
-                        h('nav', { className: 'hidden md:flex items-center space-x-8' },
-                            navItems.map(item =>
-                                h('button', {
-                                    key: item,
-                                    onClick: () => onSectionChange(item),
-                                    className: `text-sm font-medium transition-colors hover:text-primary ${
-                                        activeSection === item ? 'text-primary' : 'text-muted-foreground'
-                                    }`
-                                }, item)
+                        h('div', { className: 'hidden md:block' },
+                            h('div', { className: 'ml-10 flex items-center space-x-4' },
+                                h('div', { className: 'flex items-baseline space-x-4' },
+                                    menuItems.map((item) =>
+                                        h('button', {
+                                            key: item,
+                                            onClick: () => onSectionChange(item),
+                                            className: 'px-3 py-2 rounded-md transition-colors',
+                                            style: activeSection === item ? {
+                                                backgroundColor: 'var(--bee-primary-pale)',
+                                                color: 'var(--bee-primary-dark)',
+                                                borderBottom: '2px solid var(--bee-primary)'
+                                            } : { color: '#6b7280' },
+                                            onMouseEnter: (e) => {
+                                                if (activeSection !== item) {
+                                                    e.currentTarget.style.color = 'var(--bee-primary)';
+                                                    e.currentTarget.style.backgroundColor = 'var(--bee-primary-pale)';
+                                                }
+                                            },
+                                            onMouseLeave: (e) => {
+                                                if (activeSection !== item) {
+                                                    e.currentTarget.style.color = '#6b7280';
+                                                    e.currentTarget.style.backgroundColor = 'transparent';
+                                                }
+                                            }
+                                        }, item)
+                                    )
+                                ),
+                                h(AppearanceSwitcher)
                             )
                         ),
 
-                        // Right side items
-                        h('div', { className: 'flex items-center space-x-4' },
+                        // Mobile menu button and appearance switcher
+                        h('div', { className: 'md:hidden flex items-center space-x-2' },
                             h(AppearanceSwitcher),
-                            
-                            // Mobile menu button
                             h('button', {
-                                onClick: () => setIsMenuOpen(!isMenuOpen),
-                                className: 'md:hidden p-2 rounded-lg hover:bg-muted',
-                                'aria-label': 'Toggle menu'
+                                onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen),
+                                className: 'p-2 rounded-md',
+                                style: { color: '#6b7280' },
+                                onMouseEnter: (e) => {
+                                    e.currentTarget.style.color = 'var(--bee-primary)';
+                                },
+                                onMouseLeave: (e) => {
+                                    e.currentTarget.style.color = '#6b7280';
+                                }
                             },
-                                h(isMenuOpen ? icons.X : icons.Menu, { className: 'h-5 w-5' })
+                                h(isMobileMenuOpen ? icons.X : icons.Menu, { className: 'h-6 w-6' })
                             )
                         )
                     ),
 
                     // Mobile Navigation
-                    isMenuOpen && h('div', { className: 'md:hidden py-4 border-t border-border' },
-                        h('nav', { className: 'flex flex-col space-y-2' },
-                            navItems.map(item =>
+                    isMobileMenuOpen && h('div', { className: 'md:hidden' },
+                        h('div', { 
+                            className: 'px-2 pt-2 pb-3 space-y-1 border-t',
+                            style: { backgroundColor: 'var(--background)', borderColor: 'var(--border)' }
+                        },
+                            menuItems.map((item) =>
                                 h('button', {
                                     key: item,
                                     onClick: () => {
                                         onSectionChange(item);
-                                        setIsMenuOpen(false);
+                                        setIsMobileMenuOpen(false);
                                     },
-                                    className: `text-left py-2 px-3 rounded-lg text-sm font-medium transition-colors hover:bg-muted ${
-                                        activeSection === item ? 'bg-muted text-primary' : 'text-muted-foreground'
-                                    }`
+                                    className: 'block px-3 py-2 rounded-md w-full text-left transition-colors',
+                                    style: activeSection === item ? {
+                                        backgroundColor: 'var(--bee-primary-pale)',
+                                        color: 'var(--bee-primary-dark)'
+                                    } : { color: '#6b7280' },
+                                    onMouseEnter: (e) => {
+                                        if (activeSection !== item) {
+                                            e.currentTarget.style.color = 'var(--bee-primary)';
+                                            e.currentTarget.style.backgroundColor = 'var(--bee-primary-pale)';
+                                        }
+                                    },
+                                    onMouseLeave: (e) => {
+                                        if (activeSection !== item) {
+                                            e.currentTarget.style.color = '#6b7280';
+                                            e.currentTarget.style.backgroundColor = 'transparent';
+                                        }
+                                    }
                                 }, item)
                             )
                         )
@@ -446,7 +639,7 @@
             );
         }
 
-        // Home Section Component
+        // Home Section Component - Matching your existing design exactly
         function HomeSection({ onSectionChange }) {
             const values = [
                 {
@@ -456,7 +649,7 @@
                 },
                 {
                     icon: icons.Shield,
-                    title: "Honest Feedback",
+                    title: "Honest Feedback", 
                     description: "We give actionable feedback with empathy, without lecturing or judging your current state."
                 },
                 {
@@ -466,8 +659,36 @@
                 }
             ];
 
+            // Company logos with proper URLs
+            const companyLogos = [
+                {
+                    name: "ADS Group",
+                    src: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZHMlMjBncm91cHxlbnwxfHx8fDE3NTcyNTI2ODN8MA&ixlib=rb-4.1.0&q=80&w=200&utm_source=figma&utm_medium=referral",
+                    alt: "ADS Group - UK aerospace, defence, security and space trade organisation",
+                    url: "http://adsgroup.org.uk/"
+                },
+                {
+                    name: "CSeeker", 
+                    src: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxic2wlMjBzZXJ2aWNlc3xlbnwxfHx8fDE3NTcyNTI2ODN8MA&ixlib=rb-4.1.0&q=80&w=200&utm_source=figma&utm_medium=referral",
+                    alt: "CSeeker - British Sign Language leading agency in the UK",
+                    url: "https://cseeker.co.uk/"
+                },
+                {
+                    name: "Farnborough International",
+                    src: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdmlhdGlvbiUyMGV4aGliaXRpb258ZW58MXx8fHwxNzU3MjUyNjgzfDA&ixlib=rb-4.1.0&q=80&w=200&utm_source=figma&utm_medium=referral",
+                    alt: "Farnborough International Exhibition & Conference Centre",
+                    url: "https://www.farnborough.com/"
+                },
+                {
+                    name: "The British Motor Show",
+                    src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3RvciUyMHNob3d8ZW58MXx8fHwxNzU3MjUyNjgzfDA&ixlib=rb-4.1.0&q=80&w=200&utm_source=figma&utm_medium=referral",
+                    alt: "The British Motor Show 2025 - Major UK automotive event",
+                    url: "https://thebritishmotorshow.live/"
+                }
+            ];
+
             return h('div', { className: 'min-h-screen' },
-                // Hero Section
+                // Hero Section - Matching your exact styling
                 h('section', { 
                     className: 'py-20',
                     style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
@@ -494,14 +715,38 @@
                                 
                                 h('div', { className: 'flex flex-col sm:flex-row gap-4 mt-12' },
                                     h('button', {
-                                        className: 'bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2',
+                                        className: 'button font-semibold flex items-center justify-center space-x-2',
+                                        style: {
+                                            backgroundColor: '#fff',
+                                            color: 'var(--bee-primary)',
+                                            border: '2px solid #fff'
+                                        },
+                                        onMouseEnter: (e) => {
+                                            e.currentTarget.style.backgroundColor = 'var(--bee-primary-pale)';
+                                        },
+                                        onMouseLeave: (e) => {
+                                            e.currentTarget.style.backgroundColor = '#fff';
+                                        },
                                         onClick: () => onSectionChange("Services")
                                     },
                                         h('span', null, 'Start Your Journey'),
                                         h(icons.ArrowRight, { className: 'h-4 w-4' })
                                     ),
                                     h('button', {
-                                        className: 'border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors',
+                                        className: 'button font-semibold',
+                                        style: {
+                                            backgroundColor: 'transparent',
+                                            color: '#fff',
+                                            border: '2px solid #fff'
+                                        },
+                                        onMouseEnter: (e) => {
+                                            e.currentTarget.style.backgroundColor = '#fff';
+                                            e.currentTarget.style.color = 'var(--bee-primary)';
+                                        },
+                                        onMouseLeave: (e) => {
+                                            e.currentTarget.style.backgroundColor = 'transparent';
+                                            e.currentTarget.style.color = '#fff';
+                                        },
                                         onClick: () => onSectionChange("Contact")
                                     }, "Let's Talk")
                                 )
@@ -509,7 +754,7 @@
                             h('div', { className: 'relative' },
                                 h('img', {
                                     src: 'https://images.unsplash.com/photo-1641198714629-eb767c654e2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWUlMjBpbmNsdXNpb24lMjB0ZWFtd29ya3xlbnwxfHx8fDE3NTcyNTI2ODN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-                                    alt: 'A diverse group of professionals collaborating around a table, representing inclusive teamwork and workplace accessibility',
+                                    alt: 'A diverse group of professionals collaborating around a table, representing inclusive teamwork and workplace accessibility - embodying Bee Included mission of empathy-driven inclusion',
                                     className: 'rounded-lg shadow-2xl w-full h-auto'
                                 })
                             )
@@ -517,7 +762,7 @@
                     )
                 ),
 
-                // Our Approach Section
+                // Our Approach Section - Matching your exact styling
                 h('section', { 
                     className: 'py-20',
                     style: { backgroundColor: 'var(--background)' }
@@ -557,7 +802,7 @@
                     )
                 ),
 
-                // Trusted Brands Section
+                // Trusted Brands Section - Matching your exact styling
                 h('section', { 
                     className: 'py-16',
                     style: { backgroundColor: 'var(--bee-primary)' }
@@ -568,18 +813,20 @@
                                 'Trusted by Leading Organisations'
                             ),
                             h('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center justify-items-center max-w-6xl mx-auto' },
-                                // Placeholder for logos - these would be actual images in production
-                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
-                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'ADS Group')
-                                ),
-                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
-                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'CSeeker')
-                                ),
-                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
-                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'Farnborough International')
-                                ),
-                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
-                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'The British Motor Show 2025')
+                                companyLogos.map((logo, index) =>
+                                    h('a', {
+                                        key: index,
+                                        href: logo.url,
+                                        target: '_blank',
+                                        rel: 'noopener noreferrer',
+                                        className: 'inline-block opacity-80 hover:opacity-100 transition-opacity duration-300 hover:scale-105 transform transition-transform'
+                                    },
+                                        h('img', {
+                                            src: logo.src,
+                                            alt: logo.alt,
+                                            className: 'h-16 w-auto max-w-xs mx-auto'
+                                        })
+                                    )
                                 )
                             ),
                             h('div', { className: 'mt-8' },
@@ -591,7 +838,7 @@
                     )
                 ),
 
-                // CTA Section
+                // CTA Section - Matching your exact styling
                 h('section', { 
                     className: 'py-20',
                     style: { backgroundColor: 'var(--bee-primary-dark)' }
@@ -604,7 +851,14 @@
                             'You are not alone in this journey. Let\'s create real, lasting impact together.'
                         ),
                         h('button', {
-                            className: 'bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2 mx-auto',
+                            className: 'button font-semibold flex items-center justify-center space-x-2 mx-auto',
+                            style: { backgroundColor: '#fff', color: 'var(--bee-primary)' },
+                            onMouseEnter: (e) => {
+                                e.currentTarget.style.backgroundColor = 'var(--bee-primary-pale)';
+                            },
+                            onMouseLeave: (e) => {
+                                e.currentTarget.style.backgroundColor = '#fff';
+                            },
                             onClick: () => onSectionChange("Contact")
                         },
                             h('span', null, 'Begin the Journey'),
@@ -905,23 +1159,28 @@
                             'Track how our colourful bee and hive accessibility stickers are spreading inclusivity awareness across events, communities, and organisations nationwide.'
                         ),
                         
-                        h('div', { className: 'bg-card rounded-lg shadow-lg p-8 md:p-12 max-w-2xl mx-auto' },
-                            h(icons.Clock, { className: 'h-16 w-16 text-card-foreground/60 mx-auto mb-6' }),
+                        h('div', { className: 'card rounded-lg shadow-lg p-8 md:p-12 max-w-2xl mx-auto' },
+                            h(icons.Clock, { 
+                                className: 'h-16 w-16 mx-auto mb-6',
+                                style: { color: 'var(--card-foreground)', opacity: '0.6' }
+                            }),
                             
-                            h('h2', { className: 'text-3xl md:text-4xl font-bold text-card-foreground mb-4' },
-                                'Coming Soon'
-                            ),
+                            h('h2', { 
+                                className: 'text-3xl md:text-4xl font-bold mb-4',
+                                style: { color: 'var(--card-foreground)' }
+                            }, 'Coming Soon'),
                             
-                            h('p', { className: 'text-lg text-card-foreground/80 leading-relaxed' },
-                                'We\'re developing comprehensive mapping tools to visualise the impact of our accessibility sticker distribution programme across the UK.'
-                            )
+                            h('p', { 
+                                className: 'text-lg leading-relaxed',
+                                style: { color: 'var(--card-foreground)', opacity: '0.8' }
+                            }, 'We\'re developing comprehensive mapping tools to visualise the impact of our accessibility sticker distribution programme across the UK.')
                         )
                     )
                 )
             );
         }
 
-        // Contact Section Component - UPDATED WITH DARK MODE FIXES
+        // Contact Section Component - WITH DARK MODE FIXES
         function ContactSection() {
             const [formData, setFormData] = useState({
                 firstName: "",
@@ -989,19 +1248,30 @@
 
             return h('div', { className: 'min-h-screen py-20' },
                 // Hero Section - UPDATED FOR DARK MODE
-                h('section', { className: 'py-20' },
+                h('section', { 
+                    className: 'py-20',
+                    style: { 
+                        background: 'linear-gradient(135deg, #f0fdfa 0%, #cdfdf6 100%)'
+                    }
+                },
                     h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
-                        h('div', { className: 'hero-container' },
+                        h('div', { 
+                            className: 'p-8 rounded-lg',
+                            style: { 
+                                backgroundColor: 'var(--card)',
+                                border: '1px solid var(--border)'
+                            }
+                        },
                             h('h1', { 
                                 className: 'text-4xl md:text-5xl font-bold mb-6',
-                                style: { color: 'var(--foreground)' }
+                                style: { color: 'var(--card-foreground)' }
                             },
                                 'Let\'s Start Your ',
                                 h('span', { style: { color: 'var(--bee-primary)' } }, ' Inclusion Journey')
                             ),
                             h('p', { 
                                 className: 'text-xl max-w-3xl mx-auto mb-12',
-                                style: { color: 'var(--foreground)', opacity: '0.8' }
+                                style: { color: 'var(--card-foreground)', opacity: '0.8' }
                             },
                                 'Ready to transform your workplace culture? We\'re here to help you create an environment where everyone thrives. Get in touch to begin the conversation.'
                             ),
@@ -1030,7 +1300,7 @@
                                             action.description
                                         ),
                                         h('button', {
-                                            className: 'btn-primary'
+                                            className: 'button-primary'
                                         }, action.action)
                                     )
                                 )
@@ -1061,7 +1331,10 @@
                                     h('form', { onSubmit: handleSubmit, className: 'space-y-6' },
                                         h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-4' },
                                             h('div', null,
-                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'First Name *'),
+                                                h('label', { 
+                                                    className: 'block text-sm font-medium mb-2',
+                                                    style: { color: 'var(--card-foreground)' }
+                                                }, 'First Name *'),
                                                 h('input', {
                                                     type: 'text',
                                                     className: 'input',
@@ -1071,7 +1344,10 @@
                                                 })
                                             ),
                                             h('div', null,
-                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Last Name *'),
+                                                h('label', { 
+                                                    className: 'block text-sm font-medium mb-2',
+                                                    style: { color: 'var(--card-foreground)' }
+                                                }, 'Last Name *'),
                                                 h('input', {
                                                     type: 'text',
                                                     className: 'input',
@@ -1083,7 +1359,10 @@
                                         ),
                                         
                                         h('div', null,
-                                            h('label', { className: 'block text-sm font-medium mb-2' }, 'Email *'),
+                                            h('label', { 
+                                                className: 'block text-sm font-medium mb-2',
+                                                style: { color: 'var(--card-foreground)' }
+                                            }, 'Email *'),
                                             h('input', {
                                                 type: 'email',
                                                 className: 'input',
@@ -1095,7 +1374,10 @@
                                         
                                         h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-4' },
                                             h('div', null,
-                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Company *'),
+                                                h('label', { 
+                                                    className: 'block text-sm font-medium mb-2',
+                                                    style: { color: 'var(--card-foreground)' }
+                                                }, 'Company *'),
                                                 h('input', {
                                                     type: 'text',
                                                     className: 'input',
@@ -1105,7 +1387,10 @@
                                                 })
                                             ),
                                             h('div', null,
-                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Your Role'),
+                                                h('label', { 
+                                                    className: 'block text-sm font-medium mb-2',
+                                                    style: { color: 'var(--card-foreground)' }
+                                                }, 'Your Role'),
                                                 h('input', {
                                                     type: 'text',
                                                     className: 'input',
@@ -1117,7 +1402,10 @@
                                         
                                         h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-4' },
                                             h('div', null,
-                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Service of Interest'),
+                                                h('label', { 
+                                                    className: 'block text-sm font-medium mb-2',
+                                                    style: { color: 'var(--card-foreground)' }
+                                                }, 'Service of Interest'),
                                                 h('select', {
                                                     className: 'select',
                                                     value: formData.service,
@@ -1130,7 +1418,10 @@
                                                 )
                                             ),
                                             h('div', null,
-                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Timeline'),
+                                                h('label', { 
+                                                    className: 'block text-sm font-medium mb-2',
+                                                    style: { color: 'var(--card-foreground)' }
+                                                }, 'Timeline'),
                                                 h('select', {
                                                     className: 'select',
                                                     value: formData.timeline,
@@ -1147,7 +1438,10 @@
                                         ),
                                         
                                         h('div', null,
-                                            h('label', { className: 'block text-sm font-medium mb-2' }, 'Message'),
+                                            h('label', { 
+                                                className: 'block text-sm font-medium mb-2',
+                                                style: { color: 'var(--card-foreground)' }
+                                            }, 'Message'),
                                             h('textarea', {
                                                 className: 'textarea',
                                                 rows: 4,
@@ -1159,7 +1453,7 @@
                                         
                                         h('button', {
                                             type: 'submit',
-                                            className: 'btn-primary w-full flex items-center justify-center space-x-2'
+                                            className: 'button-primary w-full flex items-center justify-center space-x-2'
                                         },
                                             h('span', null, 'Send Message'),
                                             h(icons.Send, { className: 'h-4 w-4' })
@@ -1217,161 +1511,6 @@
             );
         }
 
-        // Privacy Policy Section Component
-        function PrivacyPolicySection() {
-            return h('div', { className: 'min-h-screen py-20' },
-                h('section', { 
-                    className: 'py-20',
-                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
-                },
-                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
-                        h('h1', { className: 'text-4xl md:text-5xl font-bold mb-6' }, 'Privacy Policy – Bee Included'),
-                        h('p', { className: 'text-xl max-w-3xl mx-auto mb-4' }, 
-                            'At Bee Included, we are committed to protecting your privacy and ensuring that your personal information is handled securely, fairly, and transparently.'
-                        ),
-                        h('p', { className: 'text-lg' }, 'Last updated: 07.9.2025')
-                    )
-                ),
-                h('section', { 
-                    className: 'py-16',
-                    style: { backgroundColor: 'var(--background)' }
-                },
-                    h('div', { className: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8' },
-                        h('div', { className: 'prose prose-lg max-w-none' },
-                            h('h2', { 
-                                className: 'text-2xl font-bold mb-4',
-                                style: { color: 'var(--foreground)' }
-                            }, '1. Information We Collect'),
-                            h('p', { 
-                                className: 'mb-6',
-                                style: { color: 'var(--muted-foreground)' }
-                            }, 'We may collect the following types of information when you use our services or visit our website:'),
-                            h('ul', { 
-                                className: 'mb-8 space-y-2',
-                                style: { color: 'var(--muted-foreground)' }
-                            },
-                                h('li', null, '• Personal details (such as name, email address, phone number)'),
-                                h('li', null, '• Business details (such as organisation name, job title)'),
-                                h('li', null, '• Accessibility requirements you choose to share with us'),
-                                h('li', null, '• Technical data (such as IP address, browser type, cookies)'),
-                                h('li', null, '• Any information you provide through forms, surveys, or feedback')
-                            ),
-
-                            h('h2', { 
-                                className: 'text-2xl font-bold mb-4',
-                                style: { color: 'var(--foreground)' }
-                            }, '8. Contact Us'),
-                            h('p', { 
-                                className: 'mb-6',
-                                style: { color: 'var(--muted-foreground)' }
-                            }, 'If you have any questions about this Privacy Policy, please contact us at:'),
-                            
-                            h('div', { 
-                                className: 'rounded-lg p-8 mb-8',
-                                style: { backgroundColor: 'var(--muted)' }
-                            },
-                                h('div', { className: 'space-y-4' },
-                                    h('div', { className: 'flex items-center space-x-3' },
-                                        h(icons.Mail, { 
-                                            className: 'h-5 w-5',
-                                            style: { color: 'var(--primary)' }
-                                        }),
-                                        h('div', null,
-                                            h('p', { 
-                                                className: 'font-semibold',
-                                                style: { color: 'var(--foreground)' }
-                                            }, 'Email'),
-                                            h('a', { 
-                                                href: 'mailto:hive@beeincluded.co.uk',
-                                                className: 'hover:underline',
-                                                style: { color: 'var(--primary)' }
-                                            }, 'hive@beeincluded.co.uk')
-                                        )
-                                    ),
-                                    
-                                    h('div', { className: 'flex items-center space-x-3' },
-                                        h(icons.MapPin, { 
-                                            className: 'h-5 w-5',
-                                            style: { color: 'var(--primary)' }
-                                        }),
-                                        h('div', null,
-                                            h('p', { 
-                                                className: 'font-semibold',
-                                                style: { color: 'var(--foreground)' }
-                                            }, 'Business Address'),
-                                            h('p', {
-                                                style: { color: 'var(--muted-foreground)' }
-                                            }, 'London, United Kingdom')
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-        }
-
-        // Terms of Service Section Component
-        function TermsOfServiceSection() {
-            return h('div', { className: 'min-h-screen py-20' },
-                h('section', { 
-                    className: 'py-20',
-                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
-                },
-                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
-                        h('h1', { className: 'text-4xl md:text-5xl font-bold mb-6' }, 'Terms of Service – Bee Included'),
-                        h('p', { className: 'text-xl max-w-3xl mx-auto mb-4' }, 
-                            'Welcome to Bee Included. By using our services or accessing our website, you agree to the following Terms of Service. Please read them carefully.'
-                        ),
-                        h('p', { className: 'text-lg' }, 'Last updated: 07.9.2025')
-                    )
-                ),
-                h('section', { 
-                    className: 'py-16',
-                    style: { backgroundColor: 'var(--background)' }
-                },
-                    h('div', { className: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8' },
-                        h('div', { className: 'prose prose-lg max-w-none' },
-                            h('h2', { 
-                                className: 'text-2xl font-bold mb-4',
-                                style: { color: 'var(--foreground)' }
-                            }, '9. Contact Us'),
-                            h('p', { 
-                                className: 'mb-6',
-                                style: { color: 'var(--muted-foreground)' }
-                            }, 'If you have any questions about these Terms, please contact us at:'),
-                            
-                            h('div', { 
-                                className: 'rounded-lg p-8 mb-8',
-                                style: { backgroundColor: 'var(--muted)' }
-                            },
-                                h('div', { className: 'space-y-4' },
-                                    h('div', { className: 'flex items-center space-x-3' },
-                                        h(icons.Mail, { 
-                                            className: 'h-5 w-5',
-                                            style: { color: 'var(--primary)' }
-                                        }),
-                                        h('div', null,
-                                            h('p', { 
-                                                className: 'font-semibold',
-                                                style: { color: 'var(--foreground)' }
-                                            }, 'Email'),
-                                            h('a', { 
-                                                href: 'mailto:hive@beeincluded.co.uk',
-                                                className: 'hover:underline',
-                                                style: { color: 'var(--primary)' }
-                                            }, 'hive@beeincluded.co.uk')
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-        }
-
         // Cookie Consent Component
         function CookieConsent() {
             const [showConsent, setShowConsent] = useState(() => {
@@ -1409,11 +1548,11 @@
                         h('div', { className: 'flex space-x-4' },
                             h('button', {
                                 onClick: declineCookies,
-                                className: 'btn-secondary text-sm px-4 py-2'
+                                className: 'button-outline text-sm px-4 py-2'
                             }, 'Decline'),
                             h('button', {
                                 onClick: acceptCookies,
-                                className: 'btn-primary text-sm px-4 py-2'
+                                className: 'button-primary text-sm px-4 py-2'
                             }, 'Accept')
                         )
                     )
@@ -1459,7 +1598,9 @@
                         // Company Info
                         h('div', { className: 'md:col-span-1' },
                             h('div', { className: 'flex items-center space-x-2 mb-4' },
-                                h('div', { className: 'h-8 w-8 bg-white rounded-full flex items-center justify-center' },
+                                h('div', { 
+                                    className: 'h-8 w-8 bg-white rounded-full flex items-center justify-center'
+                                },
                                     h('span', { 
                                         className: 'font-bold text-sm',
                                         style: { color: 'var(--bee-primary)' }
@@ -1510,7 +1651,6 @@
         // Main App Component
         function App() {
             const [activeSection, setActiveSection] = useState("Home");
-            const [appearanceMode] = useAppearanceMode();
 
             useEffect(() => {
                 // Initialize Lucide icons
@@ -1533,10 +1673,6 @@
                         return h(MappingSection);
                     case "Contact":
                         return h(ContactSection);
-                    case "Privacy Policy":
-                        return h(PrivacyPolicySection);
-                    case "Terms of Service":
-                        return h(TermsOfServiceSection);
                     default:
                         return h(HomeSection, { onSectionChange: setActiveSection });
                 }
