@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Included - Accessibility & Inclusion Solutions</title>
+    <meta name="description" content="Bee Included provides accessibility-focused services including mystery shopping, training, data dashboards, and accessibility reviews to promote inclusion at events and in organisations.">
+    
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Tailwind V4 Global CSS */
+        :root {
+            --font-size: 16px;
+            --background: #ffffff;
+            --foreground: #2c2c2c;
+            --card: #ffffff;
+            --card-foreground: #2c2c2c;
+            --popover: #ffffff;
+            --popover-foreground: #2c2c2c;
+            --primary: #c6212e;
+            --primary-foreground: #ffffff;
+            --secondary: #f5e6e7;
+            --secondary-foreground: #c6212e;
+            --muted: #f8f9fa;
+            --muted-foreground: #000000;
+            --accent: #f5e6e7;
+            --accent-foreground: #c6212e;
+            --destructive: #c6212e;
+            --destructive-foreground: #ffffff;
+            --border: rgba(198, 33, 46, 0.15);
+            --input: transparent;
+            --input-background: #f8f9fa;
+            --switch-background: #e0e0e0;
+            --font-weight-medium: 500;
+            --font-weight-normal: 400;
+            --ring: rgba(198, 33, 46, 0.3);
+            --chart-1: #c6212e;
+            --chart-2: #e85a67;
+            --chart-3: #f29da3;
+            --chart-4: #fbd7da;
+            --chart-5: #f5e6e7;
+            --radius: 0.625rem;
+            
+            /* Bee Included Brand Colors */
+            --bee-primary: #c6212e;
+            --bee-primary-light: #e85a67;
+            --bee-primary-lighter: #f29da3;
+            --bee-primary-lightest: #fbd7da;
+            --bee-primary-pale: #f5e6e7;
+            --bee-primary-dark: #a01b26;
+            --bee-primary-darker: #7a151e;
+            
+            /* Text colors for different backgrounds */
+            --text-on-primary: #ffffff;
+            --text-on-primary-muted: rgba(255, 255, 255, 0.8);
+            
+            /* Footer text */
+            --footer-text: #ffffff;
+            --footer-text-muted: rgba(255, 255, 255, 0.8);
+        }
+
+        .dark {
+            --background: #000000;
+            --foreground: #ffffff;
+            --card: #000000;
+            --card-foreground: #ffffff;
+            --popover: #000000;
+            --popover-foreground: #ffffff;
+            --primary: #c6212e;
+            --primary-foreground: #ffffff;
+            --secondary: #1a1a1a;
+            --secondary-foreground: #ffffff;
+            --muted: #1a1a1a;
+            --muted-foreground: #cccccc;
+            --accent: #1a1a1a;
+            --accent-foreground: #ffffff;
+            --destructive: #dc2626;
+            --destructive-foreground: #ffffff;
+            --border: rgba(255, 255, 255, 0.2);
+            --input: #1a1a1a;
+            --input-background: #1a1a1a;
+            --switch-background: #333333;
+            --ring: rgba(198, 33, 46, 0.4);
+        }
+
+        .yellow {
+            --background: #FDC300;
+            --foreground: #000000;
+            --card: #FDC300;
+            --card-foreground: #000000;
+            --popover: #FDC300;
+            --popover-foreground: #000000;
+            --primary: #c6212e;
+            --primary-foreground: #ffffff;
+            --secondary: #f5d000;
+            --secondary-foreground: #000000;
+            --muted: #f5d000;
+            --muted-foreground: #333333;
+            --accent: #f5d000;
+            --accent-foreground: #000000;
+            --destructive: #c6212e;
+            --destructive-foreground: #ffffff;
+            --border: rgba(0, 0, 0, 0.2);
+            --input: #f5d000;
+            --input-background: #f5d000;
+            --switch-background: #e6b800;
+            --ring: rgba(0, 0, 0, 0.3);
+            --font-weight-medium: 600;
+            --font-weight-normal: 500;
+            
+            /* Text colors for different backgrounds - BLACK text in yellow mode */
+            --text-on-primary: #000000;
+            --text-on-primary-muted: rgba(0, 0, 0, 0.8);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Custom component styles */
+        .card {
+            background-color: var(--card);
+            color: var(--card-foreground);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .btn-primary {
+            background-color: var(--bee-primary);
+            color: var(--text-on-primary);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--bee-primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--foreground);
+            border: 2px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--muted);
+        }
+
+        .input {
+            background-color: var(--input-background);
+            color: var(--foreground);
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            border-radius: var(--radius);
+            width: 100%;
+        }
+
+        .textarea {
+            background-color: var(--input-background);
+            color: var(--foreground);
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            border-radius: var(--radius);
+            width: 100%;
+            resize: vertical;
+        }
+
+        .select {
+            background-color: var(--input-background);
+            color: var(--foreground);
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            border-radius: var(--radius);
+            width: 100%;
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Screen reader only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Cookie consent styles */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--card);
+            border-top: 1px solid var(--border);
+            padding: 1rem;
+            z-index: 50;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none;
+            }
+        }
+
+        /* Hero section specific dark mode styles */
+        .hero-container {
+            background: linear-gradient(135deg, #f0fdfa 0%, #cdfdf6 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        .dark .hero-container {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        }
+
+        .yellow .hero-container {
+            background: #FDC300;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, createElement: h } = React;
+        
+        // Icon components using Lucide
+        const icons = {
+            Menu: () => h('i', { 'data-lucide': 'menu' }),
+            X: () => h('i', { 'data-lucide': 'x' }),
+            ArrowRight: () => h('i', { 'data-lucide': 'arrow-right' }),
+            Heart: () => h('i', { 'data-lucide': 'heart' }),
+            Shield: () => h('i', { 'data-lucide': 'shield' }),
+            Users: () => h('i', { 'data-lucide': 'users' }),
+            Mail: () => h('i', { 'data-lucide': 'mail' }),
+            Phone: () => h('i', { 'data-lucide': 'phone' }),
+            MapPin: () => h('i', { 'data-lucide': 'map-pin' }),
+            Clock: () => h('i', { 'data-lucide': 'clock' }),
+            Send: () => h('i', { 'data-lucide': 'send' }),
+            Calendar: () => h('i', { 'data-lucide': 'calendar' }),
+            MessageSquare: () => h('i', { 'data-lucide': 'message-square' }),
+            Eye: () => h('i', { 'data-lucide': 'eye' }),
+            Lock: () => h('i', { 'data-lucide': 'lock' }),
+            FileText: () => h('i', { 'data-lucide': 'file-text' }),
+            Scale: () => h('i', { 'data-lucide': 'scale' }),
+            AlertTriangle: () => h('i', { 'data-lucide': 'alert-triangle' }),
+            Search: () => h('i', { 'data-lucide': 'search' }),
+            ChevronDown: () => h('i', { 'data-lucide': 'chevron-down' }),
+            ChevronUp: () => h('i', { 'data-lucide': 'chevron-up' }),
+            Target: () => h('i', { 'data-lucide': 'target' }),
+            Lightbulb: () => h('i', { 'data-lucide': 'lightbulb' }),
+            BarChart: () => h('i', { 'data-lucide': 'bar-chart' }),
+            CheckCircle: () => h('i', { 'data-lucide': 'check-circle' }),
+            Star: () => h('i', { 'data-lucide': 'star' }),
+            Award: () => h('i', { 'data-lucide': 'award' }),
+            TrendingUp: () => h('i', { 'data-lucide': 'trending-up' }),
+            Zap: () => h('i', { 'data-lucide': 'zap' }),
+            Palette: () => h('i', { 'data-lucide': 'palette' }),
+            Sun: () => h('i', { 'data-lucide': 'sun' }),
+            Moon: () => h('i', { 'data-lucide': 'moon' }),
+            Sticker: () => h('i', { 'data-lucide': 'sticker' }),
+        };
+
+        // Appearance mode hook
+        function useAppearanceMode() {
+            const [mode, setMode] = useState(() => {
+                if (typeof window !== 'undefined') {
+                    return localStorage.getItem('appearanceMode') || 'light';
+                }
+                return 'light';
+            });
+
+            useEffect(() => {
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('appearanceMode', mode);
+                    document.documentElement.className = mode === 'light' ? '' : mode;
+                }
+            }, [mode]);
+
+            return [mode, setMode];
+        }
+
+        // Appearance Switcher Component
+        function AppearanceSwitcher() {
+            const [mode, setMode] = useAppearanceMode();
+            const [isOpen, setIsOpen] = useState(false);
+
+            const modes = [
+                { id: 'light', label: 'Light', icon: icons.Sun },
+                { id: 'dark', label: 'Dark', icon: icons.Moon },
+                { id: 'yellow', label: 'Yellow', icon: icons.Palette },
+            ];
+
+            return h('div', { className: 'relative' },
+                h('button', {
+                    onClick: () => setIsOpen(!isOpen),
+                    className: 'flex items-center space-x-2 px-3 py-2 rounded-lg bg-background border border-border hover:bg-muted transition-colors',
+                    'aria-label': 'Change appearance mode'
+                },
+                    h(modes.find(m => m.id === mode)?.icon || icons.Sun, { className: 'h-4 w-4' }),
+                    h('span', { className: 'hidden sm:inline' }, modes.find(m => m.id === mode)?.label),
+                    h(icons.ChevronDown, { className: 'h-4 w-4' })
+                ),
+                isOpen && h('div', {
+                    className: 'absolute top-full right-0 mt-2 w-32 bg-card border border-border rounded-lg shadow-lg z-50'
+                },
+                    modes.map(modeOption => 
+                        h('button', {
+                            key: modeOption.id,
+                            onClick: () => {
+                                setMode(modeOption.id);
+                                setIsOpen(false);
+                            },
+                            className: `w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-muted transition-colors first:rounded-t-lg last:rounded-b-lg ${mode === modeOption.id ? 'bg-muted' : ''}`
+                        },
+                            h(modeOption.icon, { className: 'h-4 w-4' }),
+                            h('span', null, modeOption.label)
+                        )
+                    )
+                )
+            );
+        }
+
+        // Header Component
+        function Header({ activeSection, onSectionChange }) {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+            const navItems = [
+                'Home', 'About', 'Services', 'Case Studies', 'Mapping', 'Contact'
+            ];
+
+            return h('header', { 
+                className: 'sticky top-0 z-40 w-full border-b border-border',
+                style: { backgroundColor: 'var(--background)' }
+            },
+                h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                    h('div', { className: 'flex items-center justify-between h-16' },
+                        // Logo
+                        h('div', { className: 'flex items-center' },
+                            h('button', {
+                                onClick: () => onSectionChange('Home'),
+                                className: 'flex items-center space-x-2'
+                            },
+                                h('div', {
+                                    className: 'h-8 w-8 rounded-full flex items-center justify-center',
+                                    style: { backgroundColor: 'var(--bee-primary)' }
+                                },
+                                    h('span', { 
+                                        className: 'font-bold text-sm',
+                                        style: { color: 'var(--text-on-primary)' }
+                                    }, 'B')
+                                ),
+                                h('span', { 
+                                    className: 'font-bold text-xl',
+                                    style: { color: 'var(--foreground)' }
+                                }, 'Bee Included')
+                            )
+                        ),
+                        
+                        // Desktop Navigation
+                        h('nav', { className: 'hidden md:flex items-center space-x-8' },
+                            navItems.map(item =>
+                                h('button', {
+                                    key: item,
+                                    onClick: () => onSectionChange(item),
+                                    className: `text-sm font-medium transition-colors hover:text-primary ${
+                                        activeSection === item ? 'text-primary' : 'text-muted-foreground'
+                                    }`
+                                }, item)
+                            )
+                        ),
+
+                        // Right side items
+                        h('div', { className: 'flex items-center space-x-4' },
+                            h(AppearanceSwitcher),
+                            
+                            // Mobile menu button
+                            h('button', {
+                                onClick: () => setIsMenuOpen(!isMenuOpen),
+                                className: 'md:hidden p-2 rounded-lg hover:bg-muted',
+                                'aria-label': 'Toggle menu'
+                            },
+                                h(isMenuOpen ? icons.X : icons.Menu, { className: 'h-5 w-5' })
+                            )
+                        )
+                    ),
+
+                    // Mobile Navigation
+                    isMenuOpen && h('div', { className: 'md:hidden py-4 border-t border-border' },
+                        h('nav', { className: 'flex flex-col space-y-2' },
+                            navItems.map(item =>
+                                h('button', {
+                                    key: item,
+                                    onClick: () => {
+                                        onSectionChange(item);
+                                        setIsMenuOpen(false);
+                                    },
+                                    className: `text-left py-2 px-3 rounded-lg text-sm font-medium transition-colors hover:bg-muted ${
+                                        activeSection === item ? 'bg-muted text-primary' : 'text-muted-foreground'
+                                    }`
+                                }, item)
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Home Section Component
+        function HomeSection({ onSectionChange }) {
+            const values = [
+                {
+                    icon: icons.Heart,
+                    title: "Empathy First",
+                    description: "We understand that inclusion is a journey built on empathy, not a checklist to complete."
+                },
+                {
+                    icon: icons.Shield,
+                    title: "Honest Feedback",
+                    description: "We give actionable feedback with empathy, without lecturing or judging your current state."
+                },
+                {
+                    icon: icons.Users,
+                    title: "Systemic Change",
+                    description: "We don't just report barriers. We empower real, systemic change for lasting impact."
+                }
+            ];
+
+            return h('div', { className: 'min-h-screen' },
+                // Hero Section
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-center' },
+                            h('div', null,
+                                h('h1', { className: 'text-4xl md:text-6xl font-bold mb-8' },
+                                    'The lived experience insight you have been missing'
+                                ),
+                                
+                                h('div', { className: 'space-y-6 text-lg md:text-xl leading-relaxed' },
+                                    h('p', null, 'Inclusion is not a checklist.'),
+                                    h('p', null, 'It is a journey built on empathy, accountability and intentional action.'),
+                                    h('p', null, 'At Bee Included, we give honest, actionable feedback with empathy.'),
+                                    h('p', null, 'We understand the journey towards full inclusion is not always perfect, but it must be intentional.'),
+                                    h('p', null, 'We are not here to lecture.'),
+                                    h('p', null, 'We are not here to judge.'),
+                                    h('p', null, 'We do not just report barriers. We empower systemic change.'),
+                                    h('p', { className: 'text-yellow-300 font-semibold' }, 'Inclusion is for everyone, always.'),
+                                    h('p', null, 'You are not alone in this journey. We are here to help you build better, for today and for the future.'),
+                                    h('p', { className: 'text-yellow-200 font-medium' }, 'We are here to improve things with you, not for public relations, but for real and lasting impact.')
+                                ),
+                                
+                                h('div', { className: 'flex flex-col sm:flex-row gap-4 mt-12' },
+                                    h('button', {
+                                        className: 'bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2',
+                                        onClick: () => onSectionChange("Services")
+                                    },
+                                        h('span', null, 'Start Your Journey'),
+                                        h(icons.ArrowRight, { className: 'h-4 w-4' })
+                                    ),
+                                    h('button', {
+                                        className: 'border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors',
+                                        onClick: () => onSectionChange("Contact")
+                                    }, "Let's Talk")
+                                )
+                            ),
+                            h('div', { className: 'relative' },
+                                h('img', {
+                                    src: 'https://images.unsplash.com/photo-1641198714629-eb767c654e2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWUlMjBpbmNsdXNpb24lMjB0ZWFtd29ya3xlbnwxfHx8fDE3NTcyNTI2ODN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+                                    alt: 'A diverse group of professionals collaborating around a table, representing inclusive teamwork and workplace accessibility',
+                                    className: 'rounded-lg shadow-2xl w-full h-auto'
+                                })
+                            )
+                        )
+                    )
+                ),
+
+                // Our Approach Section
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--background)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'text-center mb-16' },
+                            h('h2', { 
+                                className: 'text-3xl md:text-4xl font-bold mb-4',
+                                style: { color: 'var(--foreground)' }
+                            }, 'Our Approach to Inclusion'),
+                            h('p', { 
+                                className: 'text-xl max-w-3xl mx-auto',
+                                style: { color: 'var(--muted-foreground)' }
+                            }, 'We believe in creating authentic, sustainable change through empathy, accountability, and intentional action.')
+                        ),
+                        
+                        h('div', { className: 'grid grid-cols-1 md:grid-cols-3 gap-8' },
+                            values.map((value, index) =>
+                                h('div', {
+                                    key: index,
+                                    className: 'card p-8 text-center shadow-lg hover:shadow-xl transition-shadow'
+                                },
+                                    h(value.icon, { 
+                                        className: 'h-12 w-12 mx-auto mb-4',
+                                        style: { color: 'var(--bee-primary)' }
+                                    }),
+                                    h('h3', {
+                                        className: 'text-xl font-semibold mb-3',
+                                        style: { color: 'var(--bee-primary-dark)' }
+                                    }, value.title),
+                                    h('p', {
+                                        style: { color: 'var(--muted-foreground)' }
+                                    }, value.description)
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // Trusted Brands Section
+                h('section', { 
+                    className: 'py-16',
+                    style: { backgroundColor: 'var(--bee-primary)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'text-center mb-12' },
+                            h('h2', { className: 'text-2xl font-bold text-white mb-8' },
+                                'Trusted by Leading Organisations'
+                            ),
+                            h('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center justify-items-center max-w-6xl mx-auto' },
+                                // Placeholder for logos - these would be actual images in production
+                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
+                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'ADS Group')
+                                ),
+                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
+                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'CSeeker')
+                                ),
+                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
+                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'Farnborough International')
+                                ),
+                                h('div', { className: 'bg-white rounded-lg p-4 opacity-80 hover:opacity-100 transition-opacity' },
+                                    h('div', { className: 'text-center font-bold text-gray-800' }, 'The British Motor Show 2025')
+                                )
+                            ),
+                            h('div', { className: 'mt-8' },
+                                h('p', { className: 'text-white/90 text-sm' },
+                                    'Proud to support inclusivity initiatives across aerospace, defence, automotive exhibitions, British Sign Language services, and major exhibition venues'
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // CTA Section
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary-dark)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('h2', { className: 'text-3xl md:text-4xl font-bold text-white mb-4' },
+                            'Ready to Build Better Together?'
+                        ),
+                        h('p', { className: 'text-xl mb-8 max-w-2xl mx-auto text-white' },
+                            'You are not alone in this journey. Let\'s create real, lasting impact together.'
+                        ),
+                        h('button', {
+                            className: 'bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2 mx-auto',
+                            onClick: () => onSectionChange("Contact")
+                        },
+                            h('span', null, 'Begin the Journey'),
+                            h(icons.ArrowRight, { className: 'h-4 w-4' })
+                        )
+                    )
+                )
+            );
+        }
+
+        // About Section Component
+        function AboutSection() {
+            return h('div', { className: 'min-h-screen py-20' },
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('h1', { className: 'text-4xl md:text-5xl font-bold mb-6' }, 'About Bee Included'),
+                        h('p', { className: 'text-xl max-w-3xl mx-auto' }, 
+                            'We are passionate about creating inclusive environments where everyone can thrive, regardless of their background, abilities, or circumstances.'
+                        )
+                    )
+                ),
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--background)' }
+                },
+                    h('div', { className: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'prose prose-lg max-w-none' },
+                            h('h2', { 
+                                className: 'text-3xl font-bold mb-6',
+                                style: { color: 'var(--foreground)' }
+                            }, 'Our Mission'),
+                            h('p', { 
+                                className: 'text-lg mb-8',
+                                style: { color: 'var(--muted-foreground)' }
+                            }, 
+                                'At Bee Included, we believe that true inclusion goes beyond compliance—it\'s about creating cultures where every individual feels valued, respected, and empowered to contribute their best work.'
+                            ),
+                            
+                            h('h2', { 
+                                className: 'text-3xl font-bold mb-6',
+                                style: { color: 'var(--foreground)' }
+                            }, 'What We Do'),
+                            h('p', { 
+                                className: 'text-lg mb-8',
+                                style: { color: 'var(--muted-foreground)' }
+                            }, 
+                                'We provide accessibility-focused services including mystery shopping, training, data dashboards, and accessibility reviews. Our approach is built on empathy, honest feedback, and systemic change that creates lasting impact.'
+                            ),
+
+                            h('h2', { 
+                                className: 'text-3xl font-bold mb-6',
+                                style: { color: 'var(--foreground)' }
+                            }, 'Our Values'),
+                            h('ul', { 
+                                className: 'text-lg space-y-4',
+                                style: { color: 'var(--muted-foreground)' }
+                            },
+                                h('li', null, '• Empathy first - We understand that inclusion is a journey, not a destination'),
+                                h('li', null, '• Honest feedback - We provide actionable insights without judgment'),
+                                h('li', null, '• Systemic change - We don\'t just identify problems, we help solve them'),
+                                h('li', null, '• Collaboration - We work with you, not for you'),
+                                h('li', null, '• Impact - Everything we do is focused on creating real, lasting change')
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Services Section Component
+        function ServicesSection() {
+            const services = [
+                {
+                    icon: icons.Target,
+                    title: "Mystery Shopping",
+                    description: "Real-world accessibility assessments from lived experience shoppers to identify barriers and opportunities for improvement.",
+                    features: ["Lived experience panels", "Detailed accessibility reports", "Actionable recommendations", "Follow-up support"]
+                },
+                {
+                    icon: icons.Lightbulb,
+                    title: "Training",
+                    description: "Comprehensive training programmes to build awareness, skills, and confidence in creating inclusive environments.",
+                    features: ["Accessibility awareness", "Inclusive design principles", "Customer service training", "Policy development"]
+                },
+                {
+                    icon: icons.BarChart,
+                    title: "Data Dashboards",
+                    description: "Clear, actionable insights through custom dashboards that track your inclusion progress and impact over time.",
+                    features: ["Custom metrics", "Progress tracking", "Trend analysis", "Regular reporting"]
+                },
+                {
+                    icon: icons.CheckCircle,
+                    title: "Accessibility Reviews",
+                    description: "Comprehensive assessments of your services, facilities, and processes to ensure they meet accessibility standards.",
+                    features: ["Compliance audits", "Best practice recommendations", "Implementation support", "Ongoing monitoring"]
+                }
+            ];
+
+            return h('div', { className: 'min-h-screen py-20' },
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('h1', { className: 'text-4xl md:text-5xl font-bold mb-6' }, 'Our Services'),
+                        h('p', { className: 'text-xl max-w-3xl mx-auto' }, 
+                            'We provide comprehensive accessibility solutions tailored to your organisation\'s unique needs and goals.'
+                        )
+                    )
+                ),
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--background)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-8' },
+                            services.map((service, index) =>
+                                h('div', {
+                                    key: index,
+                                    className: 'card p-8 shadow-lg hover:shadow-xl transition-shadow'
+                                },
+                                    h(service.icon, { 
+                                        className: 'h-12 w-12 mb-6',
+                                        style: { color: 'var(--bee-primary)' }
+                                    }),
+                                    h('h3', {
+                                        className: 'text-2xl font-bold mb-4',
+                                        style: { color: 'var(--foreground)' }
+                                    }, service.title),
+                                    h('p', {
+                                        className: 'text-lg mb-6',
+                                        style: { color: 'var(--muted-foreground)' }
+                                    }, service.description),
+                                    h('ul', { className: 'space-y-2' },
+                                        service.features.map((feature, featureIndex) =>
+                                            h('li', {
+                                                key: featureIndex,
+                                                className: 'flex items-center space-x-2'
+                                            },
+                                                h(icons.CheckCircle, { 
+                                                    className: 'h-4 w-4',
+                                                    style: { color: 'var(--bee-primary)' }
+                                                }),
+                                                h('span', {
+                                                    style: { color: 'var(--muted-foreground)' }
+                                                }, feature)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Case Studies Section Component
+        function CaseStudiesSection() {
+            const caseStudies = [
+                {
+                    title: "The British Motor Show 2025",
+                    date: "15-17 August 2025",
+                    location: "Farnborough International Exhibition Centre",
+                    description: "Comprehensive accessibility assessment and mystery shopping programme for the UK's premier automotive exhibition.",
+                    impact: ["50+ accessibility barriers identified", "Training delivered to 200+ staff", "98% positive feedback from visitors with disabilities"],
+                    category: "Exhibition & Events"
+                },
+                {
+                    title: "ADS Group Inclusion Programme",
+                    date: "Ongoing since 2024",
+                    location: "UK Aerospace & Defence",
+                    description: "Strategic inclusion planning and training delivery across the UK aerospace, defence, security and space sectors.",
+                    impact: ["15 member organisations engaged", "500+ employees trained", "30% increase in accessibility awareness"],
+                    category: "Industry Training"
+                }
+            ];
+
+            return h('div', { className: 'min-h-screen py-20' },
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('h1', { className: 'text-4xl md:text-5xl font-bold mb-6' }, 'Case Studies'),
+                        h('p', { className: 'text-xl max-w-3xl mx-auto' }, 
+                            'Real examples of how we\'ve helped organisations create more inclusive and accessible experiences.'
+                        )
+                    )
+                ),
+                
+                // Real Impact Stories Section - WHITE BACKGROUND FOR DARK MODE VISIBILITY
+                h('section', { 
+                    className: 'py-20 bg-white'
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16' },
+                        h('h2', { 
+                            className: 'text-3xl md:text-4xl font-bold mb-6 text-gray-900'
+                        }, 'Real Impact Stories'),
+                        h('div', { className: 'max-w-4xl mx-auto space-y-6' },
+                            h('p', { 
+                                className: 'text-lg text-gray-700'
+                            }, 'Our colourful bee and hive accessibility stickers are creating measurable impact at major events across the UK.'),
+                            h('p', { 
+                                className: 'text-lg text-gray-700'
+                            }, 'From automotive exhibitions to major events, we\'re transforming how events approach inclusive design through practical, visual accessibility solutions.'),
+                            h('p', { 
+                                className: 'text-lg font-semibold',
+                                style: { color: 'var(--bee-primary)' }
+                            }, 'Every sticker placement is strategic, every implementation is measured, and every outcome builds towards a more accessible event landscape.')
+                        )
+                    )
+                ),
+                
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--background)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-8' },
+                            caseStudies.map((study, index) =>
+                                h('div', {
+                                    key: index,
+                                    className: 'card p-8 shadow-lg hover:shadow-xl transition-shadow'
+                                },
+                                    h('div', { className: 'mb-4' },
+                                        h('span', {
+                                            className: 'inline-block px-3 py-1 rounded-full text-sm font-medium',
+                                            style: { 
+                                                backgroundColor: 'var(--bee-primary-pale)',
+                                                color: 'var(--bee-primary)'
+                                            }
+                                        }, study.category)
+                                    ),
+                                    h('h3', {
+                                        className: 'text-2xl font-bold mb-2',
+                                        style: { color: 'var(--foreground)' }
+                                    }, study.title),
+                                    h('p', {
+                                        className: 'text-sm mb-2',
+                                        style: { color: 'var(--muted-foreground)' }
+                                    }, `${study.date} • ${study.location}`),
+                                    h('p', {
+                                        className: 'text-lg mb-6',
+                                        style: { color: 'var(--muted-foreground)' }
+                                    }, study.description),
+                                    h('div', null,
+                                        h('h4', {
+                                            className: 'font-semibold mb-3',
+                                            style: { color: 'var(--foreground)' }
+                                        }, 'Key Impact:'),
+                                        h('ul', { className: 'space-y-2' },
+                                            study.impact.map((item, itemIndex) =>
+                                                h('li', {
+                                                    key: itemIndex,
+                                                    className: 'flex items-center space-x-2'
+                                                },
+                                                    h(icons.Star, { 
+                                                        className: 'h-4 w-4',
+                                                        style: { color: 'var(--bee-primary)' }
+                                                    }),
+                                                    h('span', {
+                                                        style: { color: 'var(--muted-foreground)' }
+                                                    }, item)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Mapping Section Component
+        function MappingSection() {
+            return h('div', { className: 'min-h-screen py-20' },
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary)' }
+                },
+                    h('div', { className: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('div', { className: 'mb-8' },
+                            h(icons.Sticker, { className: 'h-20 w-20 text-white mx-auto mb-6' })
+                        ),
+                        
+                        h('h1', { className: 'text-4xl md:text-5xl font-bold text-white mb-6' },
+                            'Sticker Distribution',
+                            h('span', { className: 'block text-amber-300' }, '& Impact Mapping')
+                        ),
+                        
+                        h('p', { className: 'text-xl text-white/90 max-w-3xl mx-auto mb-12' },
+                            'Track how our colourful bee and hive accessibility stickers are spreading inclusivity awareness across events, communities, and organisations nationwide.'
+                        ),
+                        
+                        h('div', { className: 'bg-card rounded-lg shadow-lg p-8 md:p-12 max-w-2xl mx-auto' },
+                            h(icons.Clock, { className: 'h-16 w-16 text-card-foreground/60 mx-auto mb-6' }),
+                            
+                            h('h2', { className: 'text-3xl md:text-4xl font-bold text-card-foreground mb-4' },
+                                'Coming Soon'
+                            ),
+                            
+                            h('p', { className: 'text-lg text-card-foreground/80 leading-relaxed' },
+                                'We\'re developing comprehensive mapping tools to visualise the impact of our accessibility sticker distribution programme across the UK.'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Contact Section Component - UPDATED WITH DARK MODE FIXES
+        function ContactSection() {
+            const [formData, setFormData] = useState({
+                firstName: "",
+                lastName: "",
+                email: "",
+                company: "",
+                role: "",
+                service: "",
+                message: "",
+                timeline: ""
+            });
+
+            const handleInputChange = (field, value) => {
+                setFormData(prev => ({ ...prev, [field]: value }));
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                console.log("Form submitted:", formData);
+                alert("Thank you for your inquiry! We'll get back to you within 24 hours.");
+            };
+
+            const contactInfo = [
+                {
+                    icon: icons.Mail,
+                    title: "Email Us",
+                    details: "hive@beeincluded.co.uk",
+                    description: "Get a response within 24 hours"
+                },
+                {
+                    icon: icons.MapPin,
+                    title: "Visit Us",
+                    details: "London, United Kingdom",
+                    description: "Schedule an in-person meeting"
+                },
+                {
+                    icon: icons.Clock,
+                    title: "Business Hours",
+                    details: "Monday - Friday: 9AM - 6PM GMT",
+                    description: "Weekend support available for urgent matters"
+                }
+            ];
+
+            const services = [
+                "Mystery Shopping",
+                "Training", 
+                "Data Dashboards",
+                "Accessibility Reviews"
+            ];
+
+            const quickActions = [
+                {
+                    icon: icons.Calendar,
+                    title: "Schedule Consultation",
+                    description: "Book a free 30-minute discovery call",
+                    action: "Schedule Now"
+                },
+                {
+                    icon: icons.Users,
+                    title: "Request Demo",
+                    description: "See our solutions in action",
+                    action: "Book Demo"
+                }
+            ];
+
+            return h('div', { className: 'min-h-screen py-20' },
+                // Hero Section - UPDATED FOR DARK MODE
+                h('section', { className: 'py-20' },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('div', { className: 'hero-container' },
+                            h('h1', { 
+                                className: 'text-4xl md:text-5xl font-bold mb-6',
+                                style: { color: 'var(--foreground)' }
+                            },
+                                'Let\'s Start Your ',
+                                h('span', { style: { color: 'var(--bee-primary)' } }, ' Inclusion Journey')
+                            ),
+                            h('p', { 
+                                className: 'text-xl max-w-3xl mx-auto mb-12',
+                                style: { color: 'var(--foreground)', opacity: '0.8' }
+                            },
+                                'Ready to transform your workplace culture? We\'re here to help you create an environment where everyone thrives. Get in touch to begin the conversation.'
+                            ),
+                            
+                            // Quick Actions - UPDATED FOR DARK MODE
+                            h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-6 mb-12' },
+                                quickActions.map((action, index) =>
+                                    h('div', {
+                                        key: index,
+                                        className: 'card border-none shadow-lg hover:shadow-xl transition-shadow cursor-pointer p-6 text-center'
+                                    },
+                                        h(action.icon, { 
+                                            className: 'h-12 w-12 mx-auto mb-4',
+                                            style: { color: 'var(--bee-primary)' }
+                                        }),
+                                        h('h3', { 
+                                            className: 'text-lg font-semibold mb-2',
+                                            style: { color: 'var(--card-foreground)' }
+                                        },
+                                            action.title
+                                        ),
+                                        h('p', { 
+                                            className: 'text-sm mb-4',
+                                            style: { color: 'var(--card-foreground)', opacity: '0.7' }
+                                        },
+                                            action.description
+                                        ),
+                                        h('button', {
+                                            className: 'btn-primary'
+                                        }, action.action)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // Contact Form & Info - UPDATED FOR DARK MODE
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--background)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'grid grid-cols-1 lg:grid-cols-2 gap-12' },
+                            // Contact Form
+                            h('div', null,
+                                h('div', { className: 'card border-none shadow-lg p-6' },
+                                    h('div', { className: 'mb-6' },
+                                        h('h2', { 
+                                            className: 'text-2xl font-bold mb-2',
+                                            style: { color: 'var(--card-foreground)' }
+                                        }, 'Send Us a Message'),
+                                        h('p', {
+                                            style: { color: 'var(--card-foreground)', opacity: '0.7' }
+                                        }, 'Fill out the form below and we\'ll get back to you within 24 hours.')
+                                    ),
+                                    h('form', { onSubmit: handleSubmit, className: 'space-y-6' },
+                                        h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-4' },
+                                            h('div', null,
+                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'First Name *'),
+                                                h('input', {
+                                                    type: 'text',
+                                                    className: 'input',
+                                                    value: formData.firstName,
+                                                    onChange: (e) => handleInputChange('firstName', e.target.value),
+                                                    required: true
+                                                })
+                                            ),
+                                            h('div', null,
+                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Last Name *'),
+                                                h('input', {
+                                                    type: 'text',
+                                                    className: 'input',
+                                                    value: formData.lastName,
+                                                    onChange: (e) => handleInputChange('lastName', e.target.value),
+                                                    required: true
+                                                })
+                                            )
+                                        ),
+                                        
+                                        h('div', null,
+                                            h('label', { className: 'block text-sm font-medium mb-2' }, 'Email *'),
+                                            h('input', {
+                                                type: 'email',
+                                                className: 'input',
+                                                value: formData.email,
+                                                onChange: (e) => handleInputChange('email', e.target.value),
+                                                required: true
+                                            })
+                                        ),
+                                        
+                                        h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-4' },
+                                            h('div', null,
+                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Company *'),
+                                                h('input', {
+                                                    type: 'text',
+                                                    className: 'input',
+                                                    value: formData.company,
+                                                    onChange: (e) => handleInputChange('company', e.target.value),
+                                                    required: true
+                                                })
+                                            ),
+                                            h('div', null,
+                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Your Role'),
+                                                h('input', {
+                                                    type: 'text',
+                                                    className: 'input',
+                                                    value: formData.role,
+                                                    onChange: (e) => handleInputChange('role', e.target.value)
+                                                })
+                                            )
+                                        ),
+                                        
+                                        h('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-4' },
+                                            h('div', null,
+                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Service of Interest'),
+                                                h('select', {
+                                                    className: 'select',
+                                                    value: formData.service,
+                                                    onChange: (e) => handleInputChange('service', e.target.value)
+                                                },
+                                                    h('option', { value: '' }, 'Select a service'),
+                                                    services.map((service) =>
+                                                        h('option', { key: service, value: service }, service)
+                                                    )
+                                                )
+                                            ),
+                                            h('div', null,
+                                                h('label', { className: 'block text-sm font-medium mb-2' }, 'Timeline'),
+                                                h('select', {
+                                                    className: 'select',
+                                                    value: formData.timeline,
+                                                    onChange: (e) => handleInputChange('timeline', e.target.value)
+                                                },
+                                                    h('option', { value: '' }, 'Select timeline'),
+                                                    h('option', { value: 'immediate' }, 'Immediate (within 1 month)'),
+                                                    h('option', { value: 'short' }, 'Short-term (1-3 months)'),
+                                                    h('option', { value: 'medium' }, 'Medium-term (3-6 months)'),
+                                                    h('option', { value: 'long' }, 'Long-term (6+ months)'),
+                                                    h('option', { value: 'exploring' }, 'Just exploring')
+                                                )
+                                            )
+                                        ),
+                                        
+                                        h('div', null,
+                                            h('label', { className: 'block text-sm font-medium mb-2' }, 'Message'),
+                                            h('textarea', {
+                                                className: 'textarea',
+                                                rows: 4,
+                                                value: formData.message,
+                                                onChange: (e) => handleInputChange('message', e.target.value),
+                                                placeholder: 'Tell us about your organisation\'s goals and challenges...'
+                                            })
+                                        ),
+                                        
+                                        h('button', {
+                                            type: 'submit',
+                                            className: 'btn-primary w-full flex items-center justify-center space-x-2'
+                                        },
+                                            h('span', null, 'Send Message'),
+                                            h(icons.Send, { className: 'h-4 w-4' })
+                                        )
+                                    )
+                                )
+                            ),
+                            
+                            // Contact Information - UPDATED FOR DARK MODE
+                            h('div', { className: 'space-y-8' },
+                                h('div', null,
+                                    h('h2', { 
+                                        className: 'text-2xl font-bold mb-6',
+                                        style: { color: 'var(--foreground)' }
+                                    }, 'Get in Touch'),
+                                    h('p', { 
+                                        className: 'mb-8',
+                                        style: { color: 'var(--foreground)', opacity: '0.7' }
+                                    }, 'We\'re here to answer your questions and help you explore how inclusion can transform your organisation. Choose the way that works best for you.')
+                                ),
+                                
+                                h('div', { className: 'space-y-6' },
+                                    contactInfo.map((info, index) =>
+                                        h('div', {
+                                            key: index,
+                                            className: 'card border-none shadow-md p-6'
+                                        },
+                                            h('div', { className: 'flex items-start space-x-4' },
+                                                h(info.icon, { 
+                                                    className: 'h-6 w-6 mt-1',
+                                                    style: { color: 'var(--bee-primary)' }
+                                                }),
+                                                h('div', null,
+                                                    h('h3', {
+                                                        className: 'font-semibold mb-1',
+                                                        style: { color: 'var(--card-foreground)' }
+                                                    }, info.title),
+                                                    h('p', {
+                                                        className: 'mb-1',
+                                                        style: { color: 'var(--card-foreground)' }
+                                                    }, info.details),
+                                                    h('p', {
+                                                        className: 'text-sm',
+                                                        style: { color: 'var(--card-foreground)', opacity: '0.7' }
+                                                    }, info.description)
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Privacy Policy Section Component
+        function PrivacyPolicySection() {
+            return h('div', { className: 'min-h-screen py-20' },
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('h1', { className: 'text-4xl md:text-5xl font-bold mb-6' }, 'Privacy Policy – Bee Included'),
+                        h('p', { className: 'text-xl max-w-3xl mx-auto mb-4' }, 
+                            'At Bee Included, we are committed to protecting your privacy and ensuring that your personal information is handled securely, fairly, and transparently.'
+                        ),
+                        h('p', { className: 'text-lg' }, 'Last updated: 07.9.2025')
+                    )
+                ),
+                h('section', { 
+                    className: 'py-16',
+                    style: { backgroundColor: 'var(--background)' }
+                },
+                    h('div', { className: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'prose prose-lg max-w-none' },
+                            h('h2', { 
+                                className: 'text-2xl font-bold mb-4',
+                                style: { color: 'var(--foreground)' }
+                            }, '1. Information We Collect'),
+                            h('p', { 
+                                className: 'mb-6',
+                                style: { color: 'var(--muted-foreground)' }
+                            }, 'We may collect the following types of information when you use our services or visit our website:'),
+                            h('ul', { 
+                                className: 'mb-8 space-y-2',
+                                style: { color: 'var(--muted-foreground)' }
+                            },
+                                h('li', null, '• Personal details (such as name, email address, phone number)'),
+                                h('li', null, '• Business details (such as organisation name, job title)'),
+                                h('li', null, '• Accessibility requirements you choose to share with us'),
+                                h('li', null, '• Technical data (such as IP address, browser type, cookies)'),
+                                h('li', null, '• Any information you provide through forms, surveys, or feedback')
+                            ),
+
+                            h('h2', { 
+                                className: 'text-2xl font-bold mb-4',
+                                style: { color: 'var(--foreground)' }
+                            }, '8. Contact Us'),
+                            h('p', { 
+                                className: 'mb-6',
+                                style: { color: 'var(--muted-foreground)' }
+                            }, 'If you have any questions about this Privacy Policy, please contact us at:'),
+                            
+                            h('div', { 
+                                className: 'rounded-lg p-8 mb-8',
+                                style: { backgroundColor: 'var(--muted)' }
+                            },
+                                h('div', { className: 'space-y-4' },
+                                    h('div', { className: 'flex items-center space-x-3' },
+                                        h(icons.Mail, { 
+                                            className: 'h-5 w-5',
+                                            style: { color: 'var(--primary)' }
+                                        }),
+                                        h('div', null,
+                                            h('p', { 
+                                                className: 'font-semibold',
+                                                style: { color: 'var(--foreground)' }
+                                            }, 'Email'),
+                                            h('a', { 
+                                                href: 'mailto:hive@beeincluded.co.uk',
+                                                className: 'hover:underline',
+                                                style: { color: 'var(--primary)' }
+                                            }, 'hive@beeincluded.co.uk')
+                                        )
+                                    ),
+                                    
+                                    h('div', { className: 'flex items-center space-x-3' },
+                                        h(icons.MapPin, { 
+                                            className: 'h-5 w-5',
+                                            style: { color: 'var(--primary)' }
+                                        }),
+                                        h('div', null,
+                                            h('p', { 
+                                                className: 'font-semibold',
+                                                style: { color: 'var(--foreground)' }
+                                            }, 'Business Address'),
+                                            h('p', {
+                                                style: { color: 'var(--muted-foreground)' }
+                                            }, 'London, United Kingdom')
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Terms of Service Section Component
+        function TermsOfServiceSection() {
+            return h('div', { className: 'min-h-screen py-20' },
+                h('section', { 
+                    className: 'py-20',
+                    style: { backgroundColor: 'var(--bee-primary)', color: 'var(--text-on-primary)' }
+                },
+                    h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center' },
+                        h('h1', { className: 'text-4xl md:text-5xl font-bold mb-6' }, 'Terms of Service – Bee Included'),
+                        h('p', { className: 'text-xl max-w-3xl mx-auto mb-4' }, 
+                            'Welcome to Bee Included. By using our services or accessing our website, you agree to the following Terms of Service. Please read them carefully.'
+                        ),
+                        h('p', { className: 'text-lg' }, 'Last updated: 07.9.2025')
+                    )
+                ),
+                h('section', { 
+                    className: 'py-16',
+                    style: { backgroundColor: 'var(--background)' }
+                },
+                    h('div', { className: 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8' },
+                        h('div', { className: 'prose prose-lg max-w-none' },
+                            h('h2', { 
+                                className: 'text-2xl font-bold mb-4',
+                                style: { color: 'var(--foreground)' }
+                            }, '9. Contact Us'),
+                            h('p', { 
+                                className: 'mb-6',
+                                style: { color: 'var(--muted-foreground)' }
+                            }, 'If you have any questions about these Terms, please contact us at:'),
+                            
+                            h('div', { 
+                                className: 'rounded-lg p-8 mb-8',
+                                style: { backgroundColor: 'var(--muted)' }
+                            },
+                                h('div', { className: 'space-y-4' },
+                                    h('div', { className: 'flex items-center space-x-3' },
+                                        h(icons.Mail, { 
+                                            className: 'h-5 w-5',
+                                            style: { color: 'var(--primary)' }
+                                        }),
+                                        h('div', null,
+                                            h('p', { 
+                                                className: 'font-semibold',
+                                                style: { color: 'var(--foreground)' }
+                                            }, 'Email'),
+                                            h('a', { 
+                                                href: 'mailto:hive@beeincluded.co.uk',
+                                                className: 'hover:underline',
+                                                style: { color: 'var(--primary)' }
+                                            }, 'hive@beeincluded.co.uk')
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        // Cookie Consent Component
+        function CookieConsent() {
+            const [showConsent, setShowConsent] = useState(() => {
+                if (typeof window !== 'undefined') {
+                    return !localStorage.getItem('cookieConsent');
+                }
+                return false;
+            });
+
+            const acceptCookies = () => {
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('cookieConsent', 'accepted');
+                }
+                setShowConsent(false);
+            };
+
+            const declineCookies = () => {
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('cookieConsent', 'declined');
+                }
+                setShowConsent(false);
+            };
+
+            if (!showConsent) return null;
+
+            return h('div', { className: 'cookie-consent' },
+                h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                    h('div', { className: 'flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0' },
+                        h('div', { className: 'flex-1' },
+                            h('p', { 
+                                className: 'text-sm',
+                                style: { color: 'var(--foreground)' }
+                            }, 'We use cookies to improve your browsing experience and analyse website traffic. By clicking "Accept", you consent to our use of cookies.')
+                        ),
+                        h('div', { className: 'flex space-x-4' },
+                            h('button', {
+                                onClick: declineCookies,
+                                className: 'btn-secondary text-sm px-4 py-2'
+                            }, 'Decline'),
+                            h('button', {
+                                onClick: acceptCookies,
+                                className: 'btn-primary text-sm px-4 py-2'
+                            }, 'Accept')
+                        )
+                    )
+                )
+            );
+        }
+
+        // Footer Component
+        function Footer({ onSectionChange }) {
+            const footerSections = [
+                {
+                    title: "Services",
+                    links: [
+                        { name: "Mystery Shopping", action: () => onSectionChange("Services") },
+                        { name: "Training", action: () => onSectionChange("Services") },
+                        { name: "Data Dashboards", action: () => onSectionChange("Services") },
+                        { name: "Accessibility Reviews", action: () => onSectionChange("Services") }
+                    ]
+                },
+                {
+                    title: "Company",
+                    links: [
+                        { name: "About Us", action: () => onSectionChange("About") },
+                        { name: "Case Studies", action: () => onSectionChange("Case Studies") },
+                        { name: "Contact", action: () => onSectionChange("Contact") }
+                    ]
+                },
+                {
+                    title: "Legal",
+                    links: [
+                        { name: "Privacy Policy", action: () => onSectionChange("Privacy Policy") },
+                        { name: "Terms of Service", action: () => onSectionChange("Terms of Service") }
+                    ]
+                }
+            ];
+
+            return h('footer', { 
+                className: 'py-16',
+                style: { backgroundColor: 'var(--bee-primary)', color: 'var(--footer-text)' }
+            },
+                h('div', { className: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' },
+                    h('div', { className: 'grid grid-cols-1 md:grid-cols-4 gap-8' },
+                        // Company Info
+                        h('div', { className: 'md:col-span-1' },
+                            h('div', { className: 'flex items-center space-x-2 mb-4' },
+                                h('div', { className: 'h-8 w-8 bg-white rounded-full flex items-center justify-center' },
+                                    h('span', { 
+                                        className: 'font-bold text-sm',
+                                        style: { color: 'var(--bee-primary)' }
+                                    }, 'B')
+                                ),
+                                h('span', { className: 'font-bold text-xl' }, 'Bee Included')
+                            ),
+                            h('p', { 
+                                className: 'text-sm mb-4',
+                                style: { color: 'var(--footer-text-muted)' }
+                            }, 'Creating inclusive environments through empathy, accountability, and intentional action.'),
+                            h('p', { 
+                                className: 'text-sm',
+                                style: { color: 'var(--footer-text-muted)' }
+                            }, 'London, United Kingdom')
+                        ),
+                        
+                        // Footer Links
+                        footerSections.map((section, index) =>
+                            h('div', { key: index },
+                                h('h3', { className: 'font-semibold mb-4' }, section.title),
+                                h('ul', { className: 'space-y-2' },
+                                    section.links.map((link, linkIndex) =>
+                                        h('li', { key: linkIndex },
+                                            h('button', {
+                                                onClick: link.action,
+                                                className: 'text-sm hover:underline transition-colors',
+                                                style: { color: 'var(--footer-text-muted)' }
+                                            }, link.name)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    
+                    // Copyright
+                    h('div', { className: 'border-t border-white/20 mt-12 pt-8 text-center' },
+                        h('p', { 
+                            className: 'text-sm',
+                            style: { color: 'var(--footer-text-muted)' }
+                        }, `© ${new Date().getFullYear()} Bee Included. All rights reserved.`)
+                    )
+                )
+            );
+        }
+
+        // Main App Component
+        function App() {
+            const [activeSection, setActiveSection] = useState("Home");
+            const [appearanceMode] = useAppearanceMode();
+
+            useEffect(() => {
+                // Initialize Lucide icons
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            }, [activeSection]);
+
+            const renderSection = () => {
+                switch (activeSection) {
+                    case "Home":
+                        return h(HomeSection, { onSectionChange: setActiveSection });
+                    case "About":
+                        return h(AboutSection);
+                    case "Services":
+                        return h(ServicesSection);
+                    case "Case Studies":
+                        return h(CaseStudiesSection);
+                    case "Mapping":
+                        return h(MappingSection);
+                    case "Contact":
+                        return h(ContactSection);
+                    case "Privacy Policy":
+                        return h(PrivacyPolicySection);
+                    case "Terms of Service":
+                        return h(TermsOfServiceSection);
+                    default:
+                        return h(HomeSection, { onSectionChange: setActiveSection });
+                }
+            };
+
+            return h('div', { 
+                className: 'min-h-screen transition-colors',
+                style: { 
+                    backgroundColor: 'var(--background)', 
+                    color: 'var(--foreground)' 
+                }
+            },
+                h(Header, { activeSection, onSectionChange: setActiveSection }),
+                h('main', null, renderSection()),
+                h(Footer, { onSectionChange: setActiveSection }),
+                h(CookieConsent)
+            );
+        }
+
+        // Render the app
+        ReactDOM.render(h(App), document.getElementById('root'));
+    </script>
+</body>
+</html>
